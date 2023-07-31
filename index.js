@@ -15,6 +15,8 @@ import {
   removeUserFromLocalStorage,
   saveUserToLocalStorage,
 } from "./helpers.js";
+import {renderUserPostPageComponent} from "./components/user-post-page-component.js"
+
 
 export let user = getUserFromLocalStorage();
 export let page = null;
@@ -129,7 +131,12 @@ const renderApp = () => {
     // TODO: реализовать страницу фотографию пользователя
     // вызвать функцию рендера юзера
     appEl.innerHTML = "Здесь будет страница фотографий пользователя";
-    return;
+    return renderUserPostPageComponent({ 
+      appEl, 
+      id,
+      onAddPostClick({ description, imageUrl }) {
+        goToPage(POSTS_PAGE);
+      },});
   }
 };
 

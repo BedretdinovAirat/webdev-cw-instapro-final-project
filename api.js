@@ -3,6 +3,26 @@
 const personalKey = "prod"; // airat-bedretdinov
 const baseHost = "https://webdev-hw-api.vercel.app";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
+const userHost = `${baseHost}/api/v1/airat-bedretdinov/instapro`;
+
+export function getUserPosts({id}) {
+  return fetch(`${userHost}/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: token,
+    },
+  })
+    .then((response) => {
+      if (response.status === 401) {
+        throw new Error("Нет авторизации");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      return data.posts;
+    });
+}
+
 
 export function getPosts({ token }) {
   return fetch(postsHost, {
