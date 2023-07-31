@@ -1,4 +1,4 @@
-import { getPosts } from "./api.js";
+import { getPosts, postRequest } from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
 import {
@@ -111,15 +111,8 @@ const renderApp = () => {
       appEl,
       onAddPostClick({ description, imageUrl }) {
         // TODO: реализовать добавление поста в API
-        // 16:46 - 16:52
-        // return fetch(postsHost, {
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     login: "glebka",
-        //     name: "Глеб Фокин",
-        //     password: "123456",
-        //   }),
-        // });
+        // 16:46 - 16:52, 11:13 - 11:33 - 11:45, 17:00
+        postRequest({ token: getToken(), description, imageUrl });
         console.log("Добавляю пост...", { description, imageUrl });
         goToPage(POSTS_PAGE);
       },
@@ -133,7 +126,8 @@ const renderApp = () => {
   }
 
   if (page === USER_POSTS_PAGE) {
-    // TODO: реализовать страницу фотографию пользвателя
+    // TODO: реализовать страницу фотографию пользователя
+    // вызвать функцию рендера юзера
     appEl.innerHTML = "Здесь будет страница фотографий пользователя";
     return;
   }

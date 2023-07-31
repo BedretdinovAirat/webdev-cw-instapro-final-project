@@ -10,11 +10,11 @@ export function renderPostsPageComponent({ appEl }) {
     .map((post) => {
       return `<li class="post">
                     <div class="post-header" data-user-id="${post.user.id}">
-                        <img src="https://www.imgonline.com.ua/examples/bee-on-daisy.jpg" class="post-header__user-image">
+                        <img src="${post.user.imageUrl}" class="post-header__user-image">
                         <p class="post-header__user-name">${post.user.name}</p>
                     </div>
                     <div class="post-image-container">
-                      <img class="post-image" src="${post.user.imageUrl}">
+                      <img class="post-image" src="${post.imageUrl}">
                     </div>
                     <div class="post-likes">
                       <button data-post-id="${post.id}" class="like-button">
@@ -25,7 +25,7 @@ export function renderPostsPageComponent({ appEl }) {
                       </p>
                     </div>
                     <p class="post-text">
-                      <span class="user-name">${post.name}</span>
+                      <span class="user-name">${post.user.name}</span>
                       ${post.description}
                     </p>
                     <p class="post-date">
