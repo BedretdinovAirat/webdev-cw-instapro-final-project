@@ -1,7 +1,8 @@
-// 18:55
-export function renderUserPostPageComponent({ appEl, id }) {
+// 18:55, 21:20 - 01.08
+import { posts, goToPage } from "../index.js";
+export function renderUserPostPageComponent({ appEl}) {
   const userPostHTML = posts
-    .map((post) => {
+    .map((post, id) => {
       return `<li class="post">
                     <div class="post-header" data-user-id="${id}">
                         <img src="${post.user.imageUrl}" class="post-header__user-image">
