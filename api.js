@@ -4,7 +4,8 @@ const personalKey = "prod"; // airat-bedretdinov 10:40 - 11:35; 01:01
 const baseHost = "https://wedev-api.sky.pro";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 
-// `${userHost}/user-posts/${id}` почему коммит не прошёл?
+// нужно написать два запроса на лайки, гет и пост. postsHost + `/${userId}/like`
+// `${userHost}/user-posts/${id}` почему коммит не прошёл? 17:08
 export function getUserPosts({ userId, token }) {
   return fetch(postsHost + `/user-posts/${userId}`, {
     method: "GET",
