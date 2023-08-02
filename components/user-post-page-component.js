@@ -1,8 +1,9 @@
 // 18:55, 21:20 - 01.08
 import { posts, goToPage } from "../index.js";
-export function renderUserPostPageComponent({ appEl}) {
+import { USER_POSTS_PAGE } from "../routes.js";
+export function renderUserPostPageComponent({ appEl }) {
   const userPostHTML = posts
-    .map((post, id) => {
+    .map((post) => {
       return `<li class="post">
                     <div class="post-header" data-user-id="${id}">
                         <img src="${post.user.imageUrl}" class="post-header__user-image">
@@ -36,4 +37,11 @@ export function renderUserPostPageComponent({ appEl}) {
                 </ul>
               </div>`;
   appEl.innerHTML = appHtml;
+  for (let userEl of document.querySelectorAll(".post-header")) {
+    userEl.addEventListener("click", () => {
+      goToPage(USER_POSTS_PAGE, {
+        userId: userEl.dataset.userId,
+      });
+    });
+  }
 }
