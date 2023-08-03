@@ -6,6 +6,32 @@ const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 
 // нужно написать два запроса на лайки, гет и пост. postsHost + `/${userId}/like`
 // `${userHost}/user-posts/${id}` почему коммит не прошёл? 17:08
+// добавить лайк
+export function postLike() {
+  return fetch(postsHost + `/${userId}/like`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+    body: JSON.stringify({
+      description,
+      imageUrl,
+    }),
+  });
+}
+// убрать лайк
+export function postDislike() {
+  return fetch(postsHost + `/${userId}/like`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+    body: JSON.stringify({
+      description,
+      imageUrl,
+    }),
+  });
+}
 export function getUserPosts({ userId, token }) {
   return fetch(postsHost + `/user-posts/${userId}`, {
     method: "GET",
