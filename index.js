@@ -1,4 +1,10 @@
-import { getPosts, postRequest, getUserPosts } from "./api.js";
+import {
+  getPosts,
+  postRequest,
+  getUserPosts,
+  postDislike,
+  postLike,
+} from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
 import {
@@ -15,6 +21,7 @@ import {
   removeUserFromLocalStorage,
   saveUserToLocalStorage,
 } from "./helpers.js";
+
 export let user = getUserFromLocalStorage();
 export let page = null;
 export let posts = [];
@@ -29,6 +36,22 @@ export const logout = () => {
   removeUserFromLocalStorage();
   goToPage(POSTS_PAGE);
 };
+// 9:43
+
+export function setAndDeleteLike({ postId }) {
+  const index = posts.findIndex((post) => post.id === postId);
+  if (posts[index].isLiked) {
+    postDislike({ postId: postId, token: getToken() }).then(() => {
+      posts[index].isLiked = false;
+      renderApp();
+    });
+  } else {
+    postLike({ postId: postId, token: getToken() }).then(() => {
+      posts[index].isLiked = true;
+      renderApp();
+    });
+  }
+}
 
 /**
  * Включает страницу приложения

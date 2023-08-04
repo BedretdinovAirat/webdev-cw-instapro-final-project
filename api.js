@@ -7,30 +7,41 @@ const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 // нужно написать два запроса на лайки, гет и пост. postsHost + `/${userId}/like`
 // `${userHost}/user-posts/${id}` почему коммит не прошёл? 17:08
 // добавить лайк
-export function postLike() {
-  return fetch(postsHost + `/${userId}/like`, {
+export function postLike({ postId, token }) {
+  return fetch(postsHost + `/${postId}/like`, {
     method: "POST",
     headers: {
       Authorization: token,
     },
-    body: JSON.stringify({
-      description,
-      imageUrl,
-    }),
-  });
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((error) => {
+      if (error.message === "Нет авторизации") {
+        alert("Авторизуйтесь!");
+      }
+    });
 }
 // убрать лайк
-export function postDislike() {
-  return fetch(postsHost + `/${userId}/like`, {
+export function postDislike({ postId, token }) {
+  return fetch(postsHost + `/${postId}/like`, {
     method: "POST",
     headers: {
       Authorization: token,
     },
-    body: JSON.stringify({
-      description,
-      imageUrl,
-    }),
-  });
+  })
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error("Нет авторизации");
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      if (error.message === "Нет авторизации") {
+        alert("Авторизуйтесь!");
+      }
+    });
 }
 export function getUserPosts({ userId, token }) {
   return fetch(postsHost + `/user-posts/${userId}`, {
