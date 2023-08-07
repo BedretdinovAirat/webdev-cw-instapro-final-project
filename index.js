@@ -21,7 +21,8 @@ import {
   removeUserFromLocalStorage,
   saveUserToLocalStorage,
 } from "./helpers.js";
-import { format } from "date-fns";
+// import { format } from "date-fns";
+// нужна помощь с библиотекой
 export let user = getUserFromLocalStorage();
 export let page = null;
 export let posts = [];
